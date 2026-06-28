@@ -32,7 +32,7 @@ const Cart = () => {
                             <div className="item-info w-1/2" key={itemIndex}>
                                 <div className="name-price flex pr-3">
                                     <h3 className="item-name font-semibold mb-2">{item.card.info.name}</h3>
-                                    <span className="item-price font-semibold">{`₹${item.card.info.defaultPrice / 100}`}</span>
+                                    <span className="item-price font-semibold">{`₹${item.card.info.defaultPrice / 100 | item.card.info.price / 100}`}</span>
                                 </div>
                                 <p className="item-description text-sm">{item.card.info.description}</p>
                             </div>
