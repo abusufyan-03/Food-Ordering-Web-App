@@ -1,15 +1,29 @@
 import { useState } from "react";
 import { CDN_SMALL } from "../utils/constant";
-import { useDispatch } from "react-redux";
-import { addItem } from "../utils/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addItem, decrementItem } from "../utils/cartSlice";
+import Button from "./Button";
 const ItemList = ({ itemIndex, item }) => {
 
-    console.log(item)
+    // console.log(item)
 
     const disPatch = useDispatch();
+    const itemId = item.card.info.id;
 
-    const handleCart = (item) => {
+    const quantity = useSelector((store)=>{
+       const cartItem = store.cart.items.find(
+            (item) => 
+                item.card.info.id === itemId
+            
+        )
+        return cartItem?.quantity ?? 0;
+    })
+
+    const handleAdd = () => {
         disPatch(addItem(item))
+    }
+    const handleRemove = () =>{
+        disPatch(decrementItem(itemId))
     }
 
     return (
@@ -18,7 +32,7 @@ const ItemList = ({ itemIndex, item }) => {
                 <div className="item-info w-1/2" key={itemIndex}>
                     <div className="name-price flex pr-3">
                         <h3 className="item-name font-semibold mb-2">{item.card.info.name}</h3>
-                        <span className="item-price font-semibold">{`₹${item.card.info.defaultPrice / 100 | item.card.info.price / 100}`}</span>
+                        <span className="item-price font-semibold">{`₹${(item.card.info.defaultPrice ?? item.card.info.price) / 100}`}</span>
                     </div>
                     <p className="item-description text-sm">{item.card.info.description}</p>
                 </div>
@@ -28,10 +42,11 @@ const ItemList = ({ itemIndex, item }) => {
                         src={`${CDN_SMALL}/${item.card.info.imageId}`}
                         alt={item.card.info.name}
                     />
-                    <button className="absolute bottom-2 left-1/2 -translate-x-1/2 font-semibold bg-white text-green-600 border-0 px-4 py-1 rounded-lg shadow-sm text-sm cursor-pointer"
-                    onClick={() => handleCart(item)}>
-                        Add+
-                    </button>
+                    <Button
+                    quantity={quantity}
+                    onAdd={handleAdd}
+                    onRemove={handleRemove}
+                    />
                 </div>
             </div>
 
