@@ -17,7 +17,8 @@ const Header = () => {
 
     const {loggedInUser} = useContext(UserContext)
 
-    const cartItems = useSelector((store)=> store.cart.items)
+    const totalQuantity = useSelector((store) => store.cart.items.reduce((acc, item) => acc + item.quantity, 0)
+    )
     return(
         <header className="header h-16 bg-amber-50 border flex justify-between items-center px-4 lg:px-8">
             <div className="logo-container">
@@ -60,7 +61,7 @@ const Header = () => {
                     <li className='hover:text-orange-500'><Link to='/About'>About US</Link></li>
                     <li className='hover:text-orange-500'><Link to='/Contact'>Contact</Link></li>
                     <li className='hover:text-orange-500'><Link to='/Grocery'>Grocery</Link></li>
-                    <li className='hover:text-orange-500'><Link to={"/cart"}>Cart({ cartItems.length })</Link></li>
+                    <li className='hover:text-orange-500'><Link to={"/cart"}>Cart({ totalQuantity })</Link></li>
                 </ul>
             </div>
             <div className='nav-buttons hidden md:block'>
