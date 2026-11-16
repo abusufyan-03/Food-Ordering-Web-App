@@ -1,11 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { CDN_SMALL } from "../utils/constant";
-import ItemList from "./ItemList";
-import { clearItem, removeItem } from "../utils/cartSlice";
+import { clearItem, addItem, decrementItem } from "../utils/cartSlice";
+import Button from "./Button";
 
 const Cart = () => {
     const cartItems = useSelector((store)=> store.cart.items)
-    // console.log(cartItems[0].card.info.id)
 
     const disPatch = useDispatch();
 
@@ -13,9 +12,12 @@ const Cart = () => {
         disPatch(clearItem())
     }
 
-    const handleRemoveCartItem = (id) => {
-        disPatch(removeItem(id))
-    }
+    const handleAdd = (item) => {
+            disPatch(addItem(item))
+        }
+        const handleRemove = (itemId) =>{
+            disPatch(decrementItem(itemId))
+        }
     return(
         <>
         <section className="p-4 mx-auto md:w-lg lg:w-210">
@@ -27,12 +29,12 @@ const Cart = () => {
              <button className="py-1.5 px-5 border rounded-lg cursor-pointer hover:bg-black hover:text-white font-semibold" onClick={handleClearCart}>Clear Cart</button>
            )}
 
-            {cartItems.map((item, itemIndex)=>(
-                <div key={itemIndex} className={`item-card p-4 flex justify-between`}>
-                            <div className="item-info w-1/2" key={itemIndex}>
-                                <div className="name-price flex pr-3">
+            {cartItems.map((item)=>(
+                <div key={item.card.info.id} className={`item-card p-4 flex justify-between`}>
+                            <div className="item-info w-2/3">
+                                <div className="name-price flex justify-between pr-3">
                                     <h3 className="item-name font-semibold mb-2">{item.card.info.name}</h3>
-                                    <span className="item-price font-semibold">{`₹${item.card.info.defaultPrice / 100 | item.card.info.price / 100}`}</span>
+                                    <span className="item-price font-semibold">{`₹${item.quantity*((item.card.info.defaultPrice  ?? item.card.info.price )/100)}`}</span>
                                 </div>
                                 <p className="item-description text-sm">{item.card.info.description}</p>
                             </div>
@@ -42,10 +44,11 @@ const Cart = () => {
                                     src={`${CDN_SMALL}/${item.card.info.imageId}`}
                                     alt={item.card.info.name}
                                 />
-                                <button className="absolute bottom-2 left-1/2 -translate-x-1/2 font-semibold bg-white text-green-600 border-0 px-4 py-1 rounded-lg shadow-sm text-sm cursor-pointer"
-                    onClick={() =>handleRemoveCartItem(item.card.info.id)}>
-                        remove
-                    </button>
+                    <Button
+                    quantity={item.quantity}
+                    onAdd={() => handleAdd(item)}
+                    onRemove={() => handleRemove(item.card.info.id)}
+                    />
                             </div>
                         </div>
             ))}
