@@ -9,7 +9,8 @@ import UserContext from "../utils/UserContext.js";
 const Body = () => {
     const [restaurantList, setRestaurantList] = useState([]);
     const [searchText, setSearchText] = useState('');
-    const [filterRestaurant, setFilterRestaurant] = useState([]);
+    const [filterRestaurant, setFilterRestaurant] = useState([]); 
+    // I'm keeping the original list so filtering never destroys data. The filtered list is just what I display.
 
     useEffect(() => {
         // console.log("useEffect get called!")
@@ -73,7 +74,7 @@ const Body = () => {
 
                 </div>
                 <div className="restaurant-container grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6 lg:grid-cols-4 lg:gap-8">
-                    {filterRestaurant.map((restaurant, index) => <Link key={restaurant.info.id}   to={`restaurants/${restaurant.info.id}`}><RestaurantCards resData={restaurant} /></Link> )}
+                    {filterRestaurant.map((restaurant, index) => <Link key={restaurant.info.id} to={`restaurants/${restaurant.info.id}`}><RestaurantCards resData={restaurant} /></Link> )}
                 </div>
             </section>
         </main>
