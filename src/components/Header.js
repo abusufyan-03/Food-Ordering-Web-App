@@ -17,8 +17,9 @@ const Header = () => {
 
     const {loggedInUser} = useContext(UserContext)
 
-    const totalQuantity = useSelector((store) => store.cart.items.reduce((acc, item) => acc + item.quantity, 0)
-    )
+    const totalQuantity = useSelector((store) => store.cart.items.reduce((acc, item) => acc + item.quantity, 0));
+
+    console.log("header totalQuantity:", totalQuantity);
     return(
         <header className="header h-16 bg-amber-50 border flex justify-between items-center px-4 lg:px-8">
             <div className="logo-container">
