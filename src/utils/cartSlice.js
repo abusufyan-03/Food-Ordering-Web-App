@@ -4,8 +4,7 @@ import { current } from "@reduxjs/toolkit";
 const loadCart = () => {
         try {
             const saved = JSON.parse(localStorage.getItem("cart"));
-            if (saved === null) return [];
-            return saved
+            return Array.isArray(saved) ? saved: [];
         } catch (error) {
             return []
         }
@@ -32,7 +31,7 @@ const cartSlice = createSlice({
                     quantity: 1
                 })
             }
-            localStorage.setItem("cart", JSON.stringify(state.items));
+            // localStorage.setItem("cart", JSON.stringify(state.items));
         },
         decrementItem: (state, action) =>{
             const itemId = action.payload;
@@ -45,15 +44,15 @@ const cartSlice = createSlice({
             if(state.items[index].quantity === 0) {
                 state.items.splice(index, 1);
             }
-            localStorage.setItem("cart", JSON.stringify(state.items));
+            // localStorage.setItem("cart", JSON.stringify(state.items));
         },
         removeItem: (state, action) =>{
             state.items = state.items.filter((i) => i.card.info.id !== action.payload)
-            localStorage.setItem("cart", JSON.stringify(state.items))
+            // localStorage.setItem("cart", JSON.stringify(state.items))
         },
         clearItem: (state, action) => {
             state.items.length = 0;
-            localStorage.setItem("cart", JSON.stringify(state.items))
+            // localStorage.setItem("cart", JSON.stringify(state.items))
         }
     }
 })

@@ -6,4 +6,8 @@ const appStore = configureStore({
     }
 });
 
+appStore.subscribe(()=>{
+    localStorage.setItem("cart", JSON.stringify(appStore.getState().cart.items));
+})
+
 export default appStore;
