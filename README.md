@@ -2,6 +2,15 @@
 
 A React-based restaurant ordering application that allows users to discover restaurants, browse menus, and manage their cart using live restaurant data.
 
+## Screenshots
+
+### Restaurant Menu
+![Restaurant Menu](./src/assets/Food-Ordering-Web-App.jpg)
+
+### Cart
+![Cart](./src/assets/Cart-section.jpg)
+
+
 ## Features
 
 - Browse restaurants
@@ -15,13 +24,6 @@ A React-based restaurant ordering application that allows users to discover rest
 - Shimmer loading UI
 - Live API integration
 
-## Screenshots
-
-### Restaurant Menu
-![Restaurant Menu](./src/assets/Food-Ordering-Web-App.jpg)
-
-### Cart
-![Cart](./src/assets/Cart-section.jpg)
 
 ## Tech Stack
 
@@ -93,7 +95,7 @@ This project was built while learning React and helped me understand:
 
 ## Live Demo
 
-Coming Soon
+[for live link CLICK HERE!](https://food-ordering-web-app-sasuke.vercel.app/)
 
 ## Author
 
