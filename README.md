@@ -82,8 +82,10 @@ This project was built while learning React and helped me understand:
 
 ## Future Improvements
 
+- [x] Build a Quantity Selector
+- [x] Implement LocalStorage for cart
+- [x] Responsive mobile design improvements
 - User authentication
-- Responsive mobile design improvements
 - Checkout flow
 - Order placement functionality
 - Favorites/Wishlist feature
