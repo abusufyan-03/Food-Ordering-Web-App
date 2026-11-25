@@ -10,19 +10,15 @@ const ItemList = ({ itemIndex, item }) => {
     const disPatch = useDispatch();
     const itemId = item.card.info.id;
 
-    const quantity = useSelector((store)=>{
-       const cartItem = store.cart.items.find(
-            (item) => 
-                item.card.info.id === itemId
-            
-        )
+    const quantity = useSelector((store) => {
+        const cartItem = store.cart.items.find((item) => item.card.info.id === itemId)
         return cartItem?.quantity ?? 0;
     })
 
     const handleAdd = () => {
         disPatch(addItem(item))
     }
-    const handleRemove = () =>{
+    const handleRemove = () => {
         disPatch(decrementItem(itemId))
     }
 
@@ -43,9 +39,9 @@ const ItemList = ({ itemIndex, item }) => {
                         alt={item.card.info.name}
                     />
                     <Button
-                    quantity={quantity}
-                    onAdd={handleAdd}
-                    onRemove={handleRemove}
+                        quantity={quantity}
+                        onAdd={handleAdd}
+                        onRemove={handleRemove}
                     />
                 </div>
             </div>
